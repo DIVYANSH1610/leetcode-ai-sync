@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.env
+data/chroma_store/
+sync_output.txt
+new_folders.txt
+
+# Note: data/synced_submissions.json and data/profile_dashboard.png are
+# intentionally NOT ignored — synced_submissions.json is needed by the
+# GitHub Actions workflow to avoid re-syncing, and profile_dashboard.png
+# is embedded in README.md.

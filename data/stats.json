@@ -1,0 +1,36 @@
+{
+  "total_problems": 20,
+  "by_difficulty": {
+    "Hard": 7,
+    "Easy": 4,
+    "Medium": 9
+  },
+  "by_pattern": {
+    "Monotonic Queue (Sliding Window)": 1,
+    "Brute Force": 2,
+    "Greedy, Counting Sort": 1,
+    "Two-pass DP, Geometric": 1,
+    "Tree Algorithms, Lowest Common Ancestor (LCA) - Binary Lifting": 1,
+    "Simulation, Character Mapping": 1,
+    "Simulation": 3,
+    "Dynamic Programming - 1D, Prefix Sum": 1,
+    "Two Pointers": 1,
+    "Two Pointers, Stack": 1,
+    "Math / Direct Calculation": 1,
+    "Matrix Exponentiation, Dynamic Programming": 1,
+    "Digit Manipulation": 1,
+    "Brute-force Subarray Iteration / Nested Loops": 1,
+    "Sorting, Array Processing": 1,
+    "Dynamic Programming, Priority Queue / Min-Heap.": 1,
+    "Simulation / Backward Simulation": 1
+  },
+  "by_tag": {
+    "Array": 8,
+    "Dynamic_Programming": 1,
+    "Hash_Table": 1,
+    "Linked_List": 2,
+    "Math": 2,
+    "Misc": 4,
+    "String": 2
+  }
+}

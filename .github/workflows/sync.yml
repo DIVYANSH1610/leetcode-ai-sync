@@ -1,0 +1,58 @@
+name: Sync LeetCode Submissions
+
+on:
+  schedule:
+    # Runs every 6 hours. Adjust as you like.
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}   # allows manual trigger from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run LeetCode sync
+        id: sync
+        env:
+          LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
+          LEETCODE_CSRF: ${{ secrets.LEETCODE_CSRF }}
+          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+        run: python scripts/sync_leetcode.py | tee sync_output.txt
+
+      - name: Enrich new solutions with AI
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Extract folder paths printed by sync_leetcode.py (lines starting with "  - ")
+          grep "^  - " sync_output.txt | sed 's/^  - //' > new_folders.txt || true
+          if [ -s new_folders.txt ]; then
+            python scripts/enrich.py $(cat new_folders.txt)
+          else
+            echo "No new folders to enrich."
+          fi
+
+      - name: Update RAG vector store
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python rag/ingest.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "leetcode-sync-bot"
+          git config user.email "actions@github.com"
+          git add leetcode-questions/ data/
+          git diff --staged --quiet || git commit -m "chore: sync LeetCode submissions [automated]"
+          git push
