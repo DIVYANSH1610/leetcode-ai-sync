@@ -9,6 +9,7 @@
 ![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB-green)
 ![GitHub Actions](https://img.shields.io/badge/Automation-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
+[![Sync Status](https://github.com/DIVYANSH1610/leetcode-ai-sync/actions/workflows/sync.yml/badge.svg)](https://github.com/DIVYANSH1610/leetcode-ai-sync/actions/workflows/sync.yml)
 
 ---
 
