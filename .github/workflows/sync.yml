@@ -30,7 +30,9 @@ jobs:
           LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
           LEETCODE_CSRF: ${{ secrets.LEETCODE_CSRF }}
           LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
-        run: python scripts/sync_leetcode.py | tee sync_output.txt
+        run: |
+          set -o pipefail
+          python scripts/sync_leetcode.py | tee sync_output.txt
 
       - name: Enrich new solutions with AI
         env:
